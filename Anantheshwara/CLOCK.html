@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            
+        }
+        .main{
+            height:200px;
+            width:200px;
+            border: solid 10px #333;
+            border-radius: 50%;
+            position: relative;
+            margin-top:100px ;
+        }
+        .number{
+            transform: translate(-50%, -50%);
+            position: absolute;
+            font-size:16px;
+            font-weight:900;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .hand{
+            position: absolute;
+            transform-origin: 50% 100%;
+        }
+        .hour{
+            height:50px;
+            width:8px;
+            background-color: #333;
+            top:50px;
+            left:96px;
+            border-radius: 4px 4px 0 0;
+        }
+        .minute{
+            height:80px;
+            width:4px;
+            background-color: #333;
+            top:20px;
+            left:98px;
+
+        }
+        .second{
+            background-color: red;
+            height:90px;
+            width:2px;
+            top:10px;
+            left:99px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="point" style=" position: absolute;
+        width: 6%;
+        height: 6%;
+        background-color: #61dafb;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);z-index:1"></div>
+        <div class="number" style="top: 20px; left: 100px;">12</div>
+        <div class="number" style="top:100px;left:180px">3</div>
+        <div class="number" style="top:180px;left:100px">6</div>
+        <div class="number" style="top:100px;left:20px">9</div>
+        <div class="hand hour" id="hours"></div>
+        <div class="hand minute" id="minutes"></div>
+        <div class="hand second" id="seconds"></div>
+        
+    </div>
+    <script>
+        function updateclock(){
+            const now=new Date();
+            const hours=now.getHours() % 12;
+            const minutes=now.getMinutes();
+            const seconds=now.getSeconds();
+
+            const hourhand=document.getElementById("hours");
+            const minutehand=document.getElementById("minutes");
+            const secondhand=document.getElementById("seconds");
+
+            const hourdeg=(hours+ minutes/60) * 30;
+            const mindeg=(minutes +seconds /60) *6;
+            const seconddeg=seconds*6;
+            hourhand.style.transform = `rotate(${hourdeg}deg)`;
+            minutehand.style.transform=`rotate(${mindeg}deg)`;
+            secondhand.style.transform=`rotate(${seconddeg}deg)`;
+        }
+        setInterval(updateclock,1000);
+        updateclock();
+    </script>
+</body>
+</html>
